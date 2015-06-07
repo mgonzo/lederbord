@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   get 'dashboard/index'
 
@@ -7,6 +8,29 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'dashboard#index'
+
+
+  # The api routes
+  scope '/api' do
+    scope '/v1' do
+
+      # groups
+      scope '/groups' do
+        get '/' => 'api_groups#index'
+        get '/list' => 'api_groups#list'
+        get '/:id' => 'api_groups#group'
+      end
+
+      #images
+      scope '/images' do
+        get '/' => 'api_images#index'
+      end
+
+    end
+  end
+
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
